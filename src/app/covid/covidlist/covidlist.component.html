@@ -7,20 +7,31 @@
     </select>
     <select [(ngModel)]="selectedParam">
         <option value="">Válassz adatot</option>
+        <option *ngFor="let param of params">{{param.key}}</option>
     </select>
-    <button (click)="fetchData()" [disabled]="!selectedCountry">Mutat</button>
+    
 </div>
 <div>
     
 </div>
-<div *ngFor="let item of data">
-    <ul >
-        <li>
-            <h3> Adatok innen {{item.country}}</h3>
-            {{item.deaths}}
+<div *ngIf="selectedParam">
+    <h3>{{selectedParam}}</h3>
+   
+        <p>{{ getSelectedParamValue()}}</p>
+</div>
+
+<div *ngIf="!selectedParam">
+    <h3>Összes adat</h3>
+    <ul>
+        <li *ngFor="let param of params">
+
+            {{param.key}}: {{param.value}}
         </li>
     </ul>
+
 </div>
+
+
 
 
 

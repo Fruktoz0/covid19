@@ -13,8 +13,10 @@ export class CovidlistComponent implements OnInit {
   selectedCountry?: string;
   data: any[] = [];
 
-  params: string[] = [];
+  params: { key: string, value: any }[] = [];
+
   selectedParam?: string;
+ 
  
 
 
@@ -36,17 +38,25 @@ export class CovidlistComponent implements OnInit {
 fetchData() {
   if (this.selectedCountry) {
     this.covid.getCasesByCountry(this.selectedCountry).subscribe(response => {
-      this.data = [response];
+      this.params = Object.entries(response).map(([key, value]) => ({ key, value }));
+    
     });
   }
   }
 
   onCountryChanged(country: string){
     this.selectedCountry = country;
+    this.fetchData();
   }
 
-  
-
+  getSelectedParamValue(): any {
+    if (this.selectedParam) {
+      const param = this.params.find(item => item.key === this.selectedParam);
+      return param ? param.value : '';
+    } else {
+      return this.params.map(item => `${item.key}: ${item.value}`).join(', ');
+    }
+  }
  
 }
 
