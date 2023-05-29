@@ -1,0 +1,26 @@
+<div>
+    <h2>Covid Data</h2>
+    <select [ngModel]="selectedCountry" (ngModelChange)="onCountryChanged($event)">
+        <option value="">Válassz országot</option>
+        <option value="hungary">Magyarország</option>
+        <option value="france">Franciaország</option>
+    </select>
+    <select [(ngModel)]="selectedParam">
+        <option value="">Válassz adatot</option>
+    </select>
+    <button (click)="fetchData()" [disabled]="!selectedCountry">Mutat</button>
+</div>
+<div>
+    
+</div>
+<div *ngFor="let item of data">
+    <ul >
+        <li>
+            <h3> Adatok innen {{item.country}}</h3>
+            {{item.deaths}}
+        </li>
+    </ul>
+</div>
+
+
+

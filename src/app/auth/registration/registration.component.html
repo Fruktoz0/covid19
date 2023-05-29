@@ -1,0 +1,24 @@
+<mat-card>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <mat-card-header>
+            <mat-card-title>Regisztráció</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="login-form">
+                <mat-form-field appearance="outline">
+                    <mat-label>Felhasználónév</mat-label>
+                    <input matInput placeholder="Felhasználónév" formControlName="username">
+                    <mat-error *ngIf="registerForm.controls['username'].invalid && (registerForm.controls['username'].dirty || registerForm.controls['username'].touched)">Felhasználónév megadása kötelező</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Jelszó</mat-label>
+                    <input matInput placeholder="Jelszó" type="password" formControlName="password">
+                    <mat-error *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)">Jelszó megadása kötelező</mat-error>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions align="start">
+            <button mat-button [disabled]="registerForm.invalid" color="primary" routerLink="registration">Regisztráció</button>
+        </mat-card-actions>
+    </form>
+</mat-card>
